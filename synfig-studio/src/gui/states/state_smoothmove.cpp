@@ -116,10 +116,13 @@ public:
 	void set_radius(float x) { return adj_radius->set_value(x); }
 
 	void refresh_radius() { duck_dragger_->set_radius(get_radius()*pressure); }
+	void refresh_cursor() { get_work_area()->set_cursor(Gdk::FLEUR); }
 
 	Smach::event_result event_stop_handler(const Smach::event& x);
 
 	Smach::event_result event_refresh_tool_options(const Smach::event& x);
+
+	Smach::event_result event_refresh_cursor(const Smach::event& x);
 
 	void refresh_tool_options();
 
@@ -143,6 +146,7 @@ StateSmoothMove::StateSmoothMove():
 {
 	insert(event_def(EVENT_REFRESH_TOOL_OPTIONS,&StateSmoothMove_Context::event_refresh_tool_options));
 	insert(event_def(EVENT_STOP,&StateSmoothMove_Context::event_stop_handler));
+	insert(event_def(EVENT_REFRESH_CURSOR,&StateSmoothMove_Context::event_refresh_cursor));
 }
 
 StateSmoothMove::~StateSmoothMove()
@@ -233,7 +237,7 @@ StateSmoothMove_Context::StateSmoothMove_Context(CanvasView* canvas_view):
 
 	App::dock_toolbox->refresh();
 
-	get_work_area()->set_cursor(Gdk::FLEUR);
+	refresh_cursor();
 	//get_work_area()->reset_cursor();
 }
 
@@ -250,6 +254,13 @@ Smach::event_result
 StateSmoothMove_Context::event_refresh_tool_options(const Smach::event& /*x*/)
 {
 	refresh_tool_options();
+	return Smach::RESULT_ACCEPT;
+}
+
+Smach::event_result
+StateSmoothMove_Context::event_refresh_cursor(const Smach::event& /*x*/)
+{
+	refresh_cursor();
 	return Smach::RESULT_ACCEPT;
 }
 

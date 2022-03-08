@@ -343,6 +343,12 @@ WorkArea::set_drag_mode(DragMode mode)
 {
 	if (drag_mode == mode) return;
 
+	if (mode == DRAG_WINDOW)
+		set_cursor(Gdk::FLEUR);
+	else if (drag_mode == DRAG_WINDOW)
+		if (canvas_view->get_smach().process_event(EVENT_REFRESH_CURSOR) != Smach::RESULT_ACCEPT)
+			reset_cursor();
+
 	drag_mode = mode;
 
 	if (lock_ducks && drag_mode == DRAG_NONE)
@@ -350,6 +356,7 @@ WorkArea::set_drag_mode(DragMode mode)
 	else
 	if (!lock_ducks && drag_mode != DRAG_NONE)
 		lock_ducks = new LockDucks(get_canvas_view());
+
 }
 
 void
