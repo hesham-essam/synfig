@@ -350,6 +350,11 @@ WorkArea::set_drag_mode(DragMode mode)
 	else
 	if (!lock_ducks && drag_mode != DRAG_NONE)
 		lock_ducks = new LockDucks(get_canvas_view());
+
+	if (drag_mode == DRAG_WINDOW)
+		set_cursor(Gdk::FLEUR);
+	else
+		canvas_view->get_smach().process_event(EVENT_REFRESH_CURSOR);
 }
 
 void

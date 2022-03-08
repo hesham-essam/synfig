@@ -195,6 +195,7 @@ public:
 	Smach::event_result event_key_down_handler(const Smach::event& x);
 	Smach::event_result event_key_up_handler(const Smach::event& x);
 	Smach::event_result event_refresh_tool_options(const Smach::event& x);
+	Smach::event_result event_refresh_cursor(const Smach::event& x);
 	void refresh_tool_options();
 	Smach::event_result event_layer_click(const Smach::event& x);
 
@@ -219,6 +220,7 @@ StateNormal::StateNormal():
 	insert(event_def(EVENT_WORKAREA_KEY_DOWN,&StateNormal_Context::event_key_down_handler));
 	insert(event_def(EVENT_WORKAREA_KEY_UP,&StateNormal_Context::event_key_up_handler));
 	insert(event_def(EVENT_WORKAREA_LAYER_CLICKED,&StateNormal_Context::event_layer_click));
+	insert(event_def(EVENT_REFRESH_CURSOR,&StateNormal_Context::event_refresh_cursor));
 
 }
 
@@ -558,6 +560,13 @@ Smach::event_result
 StateNormal_Context::event_refresh_tool_options(const Smach::event& /*x*/)
 {
 	refresh_tool_options();
+	return Smach::RESULT_ACCEPT;
+}
+
+Smach::event_result
+StateNormal_Context::event_refresh_cursor(const Smach::event& /*x*/)
+{
+	refresh_cursor();
 	return Smach::RESULT_ACCEPT;
 }
 
