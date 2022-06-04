@@ -12,8 +12,11 @@ if (HARFBUZZ_FOUND)
 endif()
 
 target_include_directories(lyr_freetype PRIVATE ${FT_INCLUDE_DIRS} ${FONT_CONFIG_INCLUDE_DIRS} ${HARFBUZZ_INCLUDE_DIRS} ${FRIBIDI_INCLUDE_DIRS})
+target_link_libraries(lyr_freetype synfig ${FT_LINK_LIBRARIES} ${FONT_CONFIG_LINK_LIBRARIES} ${HARFBUZZ_LINK_LIBRARIES} ${FRIBIDI_LINK_LIBRARIES})
 
-target_link_libraries(lyr_freetype synfig ${FT_LDFLAGS} ${FONT_CONFIG_LDFLAGS} ${HARFBUZZ_LDFLAGS} ${FRIBIDI_LDFLAGS})
+if (FRIBIDI_STATIC_LIBRARIES)
+  target_compile_definitions(lyr_freetype PRIVATE -DFRIBIDI_LIB_STATIC)
+endif()
 
 install (
     TARGETS lyr_freetype

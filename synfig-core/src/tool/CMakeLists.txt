@@ -1,6 +1,6 @@
 ## Command line synfig binary
 add_executable(synfig_bin main.cpp)
-set_target_properties(synfig_bin PROPERTIES OUTPUT_NAME synfig)
+set_target_properties(synfig_bin PROPERTIES OUTPUT_NAME synfig_tool)
 
 # TODO: more full list of features
 target_compile_features(synfig_bin PUBLIC

@@ -43,12 +43,17 @@ if(TARGET desktop_file)
     )
 endif()
 
-if(NOT MSVC)
 add_dependencies(synfigstudio
     build_images
+)
+if (TARGET build_pofiles_synfigstudio)
+add_dependencies(synfigstudio
     build_pofiles_synfigstudio
 )
+endif()
 
+
+if(NOT MSVC)
 if(TARGET plugins_xml)
     add_dependencies(synfigstudio plugins_xml)
 endif()

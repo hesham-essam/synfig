@@ -1,0 +1,37 @@
+commit c0e4045262f0f06799f1bbd81c87354747ea0cb9
+Author: Hesham Essam <hesham.essam.mail@gmail.com>
+Date:   Fri Jun 3 22:36:30 2022 +0200
+
+    Enable static builds with msvc
+
+diff --git a/gdk/gdkmmconfig.h.meson b/gdk/gdkmmconfig.h.meson
+index dde7944b..a5e29793 100644
+--- a/gdk/gdkmmconfig.h.meson
++++ b/gdk/gdkmmconfig.h.meson
+@@ -18,6 +18,9 @@
+ /* Micro version number of gdkmm. */
+ #mesondefine GDKMM_MICRO_VERSION
+ 
++/* Define when building gtkmm as a static library. */
++#mesondefine GDKMM_STATIC_LIB
++
+ /* Enable DLL-specific stuff only when not building a static library nor using gendef. */
+ #if !defined(__CYGWIN__) && defined(_WIN32) && \
+     !defined(GDKMM_STATIC_LIB) && !defined(GDKMM_USE_GENDEF)
+diff --git a/gdk/meson.build b/gdk/meson.build
+index 1719b1ec..81bfea55 100644
+--- a/gdk/meson.build
++++ b/gdk/meson.build
+@@ -43,12 +43,6 @@ pkg_conf_data.set('GTKMM_MICRO_VERSION', gtkmm_micro_version)
+ 
+ library_build_type = get_option('default_library')
+ 
+-if cpp_compiler.get_argument_syntax() == 'msvc'
+-  if library_build_type == 'static' or library_build_type == 'both'
+-    error('Static builds are not supported by MSVC-style builds')
+-  endif
+-endif
+-
+ if library_build_type == 'static'
+   pkg_conf_data.set('GDKMM_STATIC_LIB', 1)
+   pkg_conf_data.set('GTKMM_STATIC_LIB', 1)

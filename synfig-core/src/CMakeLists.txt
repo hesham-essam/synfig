@@ -3,7 +3,7 @@
 ##
 
 # TODO: check if we really need all of them
-find_package(Boost REQUIRED system)
+find_package(Boost REQUIRED)
 
 find_package(ZLIB REQUIRED)
 
@@ -152,7 +152,7 @@ else()
 		pkg_check_modules(LIBMNG libmng) # for mod_mng (set as optional as it is not correctly installed in Debian)
 		pkg_check_modules(LIBJPEG REQUIRED libjpeg) # for mod_mng
 		pkg_check_modules(OPENEXR OpenEXR) # for mod_openexr
-		pkg_check_modules(MAGICKCORE REQUIRED MagickCore) # for Magick++
+    pkg_check_modules(MAGICKCORE MagickCore) # for Magick++
 
 		## TODO: move to module where it is actually required
 		pkg_check_modules(FT REQUIRED freetype2) # for lyr_freetype
