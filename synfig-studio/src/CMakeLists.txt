@@ -29,10 +29,11 @@ else()
 	## TODO: check if we really need to find deps common with synfig core
 	include(FindPkgConfig)
 	if(PKG_CONFIG_FOUND)
-		pkg_check_modules(SIGCPP REQUIRED sigc++-2.0)
-		pkg_check_modules(GTKMM REQUIRED gtkmm-3.0)
-		pkg_check_modules(LIBXML REQUIRED libxml++-2.6)
-		pkg_search_module(MLT mlt++-7 mlt++) # required for widget_soundwave
+		pkg_check_modules(SIGCPP REQUIRED IMPORTED_TARGET sigc++-2.0)
+		pkg_check_modules(GTKMM REQUIRED IMPORTED_TARGET gtkmm-3.0)
+		pkg_check_modules(LIBXML REQUIRED IMPORTED_TARGET libxml++-2.6)
+		pkg_check_modules(FONT_CONFIG REQUIRED IMPORTED_TARGET libxml++-2.6)
+		pkg_search_module(MLT IMPORTED_TARGET mlt++-7 mlt++) # required for widget_soundwave
 	endif()
 
 	foreach(pkg_config_lib SIGCPP GTKMM LIBXML MLT FFTW)

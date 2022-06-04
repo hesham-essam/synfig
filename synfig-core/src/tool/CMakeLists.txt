@@ -1,6 +1,13 @@
 ## Command line synfig binary
-add_executable(synfig_bin main.cpp)
-set_target_properties(synfig_bin PROPERTIES OUTPUT_NAME synfig)
+add_executable(synfig_bin
+        "${CMAKE_CURRENT_LIST_DIR}/main.cpp"
+        "${CMAKE_CURRENT_LIST_DIR}/definitions.cpp"
+        "${CMAKE_CURRENT_LIST_DIR}/joblistprocessor.cpp"
+        "${CMAKE_CURRENT_LIST_DIR}/optionsprocessor.cpp"
+        "${CMAKE_CURRENT_LIST_DIR}/printing_functions.cpp"
+        "${CMAKE_CURRENT_LIST_DIR}/renderprogress.cpp"
+)
+set_target_properties(synfig_bin PROPERTIES OUTPUT_NAME synfig_tool)
 
 # TODO: more full list of features
 target_compile_features(synfig_bin PUBLIC
@@ -9,16 +16,8 @@ target_compile_features(synfig_bin PUBLIC
     cxx_override
 )
 
-target_sources(synfig_bin
-    PRIVATE
-        "${CMAKE_CURRENT_LIST_DIR}/definitions.cpp"
-        "${CMAKE_CURRENT_LIST_DIR}/joblistprocessor.cpp"
-        "${CMAKE_CURRENT_LIST_DIR}/optionsprocessor.cpp"
-        "${CMAKE_CURRENT_LIST_DIR}/printing_functions.cpp"
-        "${CMAKE_CURRENT_LIST_DIR}/renderprogress.cpp"
-)
-
 target_link_libraries(synfig_bin PRIVATE synfig)
+
 if(TCMALLOC_LIBRARY)
     target_link_libraries(synfig_bin PRIVATE ${TCMALLOC_LIBRARY})
 endif()
