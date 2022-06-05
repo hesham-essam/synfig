@@ -32,7 +32,7 @@ else()
 		pkg_check_modules(SIGCPP REQUIRED IMPORTED_TARGET sigc++-2.0)
 		pkg_check_modules(GTKMM REQUIRED IMPORTED_TARGET gtkmm-3.0)
 		pkg_check_modules(LIBXML REQUIRED IMPORTED_TARGET libxml++-2.6)
-		pkg_check_modules(FONT_CONFIG REQUIRED IMPORTED_TARGET libxml++-2.6)
+		pkg_check_modules(FONT_CONFIG IMPORTED_TARGET fontconfig) # for FontConfig
 		pkg_search_module(MLT IMPORTED_TARGET mlt++-7 mlt++) # required for widget_soundwave
 	endif()
 
