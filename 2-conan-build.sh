@@ -1,6 +1,6 @@
 #!/bin/env bash
 
-export CONAN_DEFAULT_PACKAGE_ID_MODE=full_package_mode
+export CONAN_DEFAULT_PACKAGE_ID_MODE="full_package_mode"
 SCRIPT_DIR="$(readlink --canonicalize $(dirname -- "${BASH_SOURCE[0]:-$0}"))";
 
 cd $SCRIPT_DIR

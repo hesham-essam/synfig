@@ -5,4 +5,6 @@ cd $PSScriptRoot/conan-recipes/gtkmm/all
 conan export . gtkmm/3.24.6@
 cd $PSScriptRoot/conan-recipes/autoconf/all
 conan export . autoconf/2.71@
+cd $PSScriptRoot/conan-recipes/synfig/all
+conan export . synfig/latest@
 cd $Cd

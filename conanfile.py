@@ -1,17 +1,18 @@
-from conans import ConanFile
+from conan.tools.cmake import CMake, CMakeToolchain
+from conans import tools, ConanFile
 
 class SynfigConan(ConanFile):
-    name = "Synfig"
+    name = "synfig"
     homepage = "https://www.synfig.org/"
     license = "GPL-3"
     settings = "os", "compiler", "build_type", "arch"
 
-    # the new CMakeToolchain and CMakeDeps require newer version of cmake
-    generators = "cmake_find_package", "pkg_config", "virtualrunenv"
+    generators = "CMakeToolchain", "CMakeDeps", "pkg_config", "virtualrunenv", "virtualbuildenv"
 
     def build_requirements(self):
         self.build_requires("pkgconf/1.7.4")
         self.build_requires("gettext/0.21")
+        self.build_requires("cmake/3.23.1")
 
     def requirements(self):
         self.requires("openexr/3.1.5")
@@ -35,7 +36,7 @@ class SynfigConan(ConanFile):
         self.requires("libtool/2.4.6")
         self.requires("gettext/0.21")
 
-    def config_options(self):
+    def configure(self):
         self.options["glib"].shared = True
         self.options["pango"].shared = True
         self.options["cairo"].shared = True
@@ -48,3 +49,9 @@ class SynfigConan(ConanFile):
         self.options["pangomm"].shared = True
         self.options["gtkmm"].shared = True
         self.options["libxmlpp"].shared = True
+
+    def build(self):
+        with tools.environment_append({"PKG_CONFIG_PATH": self.install_folder}):
+            cmake = CMake(self)
+            cmake.configure()
+            cmake.build()
