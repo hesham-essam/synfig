@@ -12,6 +12,9 @@ set(STUDIO_VERSION_PATCH 0)
 
 option(ENABLE_TCMALLOC "Enable use of tcmalloc library" OFF)
 
+
+
+
 if(NOT CMAKE_BUILD_TYPE)
 	set(CMAKE_BUILD_TYPE Debug)
 endif()
